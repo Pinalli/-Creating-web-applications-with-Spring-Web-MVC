@@ -1,39 +1,64 @@
 package com.pinalli.springwebmvc.model;
 
+
 import org.springframework.lang.Nullable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "jedi")
 public class Jedi {
-    @Nullable
-    private String name;
-    @Nullable
-    private String lastName;
 
-    public Jedi() {
+        @Id
+        @Column(name="id_jedi")
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
+
+        @Size(min = 3, max = 10, message = "Nome deve conter entre 3 e 10 caracteres")
+        @NotBlank(message = "Nome não pode estar em branco")
+        @Column(name = "name")
+        private String name;
+
+        @NotBlank(message = "Sobrenome não pode estar em branco")
+        @Column(name = "last_name")
+        private String lastName;
+
+        public Jedi (final String name, final String lastname) {
+            this.name = name;
+            this.lastName = lastname;
+        }
+
+        public Jedi () {
+        }
+
+        public String getName () {
+            return name;
+        }
+
+        public void setName (final String name) {
+            this.name = name;
+        }
+
+        public String getLastName () {
+            return lastName;
+        }
+
+        public void setLastName (final String lastName) {
+            this.lastName = lastName;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(final Long id) {
+            this.id = id;
+        }
     }
-    public Jedi(final String name, final String lastName) {
-        this.name = name;
-        this.lastName = lastName;
 
-
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
-
-}
